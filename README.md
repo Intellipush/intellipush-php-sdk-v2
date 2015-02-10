@@ -10,7 +10,8 @@ Usage
 
 Sign up
 -----
-[Intellipush](https://www.intellipush.com)
+[Intellipush.com](https://www.intellipush.com)
 
 
+Enjoy our service!
 /Intellipush
