@@ -44,6 +44,16 @@ spl_autoload_register(function($class) {
     }
 });
 
+
+// ###########################################################################
+// ------------------------        WARNING
+
+// THIS SCRIPT WILL SEND ABOUT 10 MESSAGES NOW AND IN 20 MINUTES
+
+// ------------------------        WARNING
+// ###########################################################################
+
+
 $key = 'xxxxxxxxx';
 $secret = 'yyyyyyyyyyyyyyyyyyyyyyyyy';
 $countrycodeToTest = '0047';
@@ -146,7 +156,18 @@ $response = $intellipush->create($sms);
 
 renderSectionOutput($response, 'Creating SMS with repeat');
 
+$repeat_notification_id = $response->response->data->id;
 
+/**
+		CLEANING UP AND DELETING REPEATING MESSAGE
+**/
+$sms = new Intellipush\Notification\Sms();
+
+$sms->id( $repeat_notification_id );
+
+$response = $intellipush->delete($sms);
+
+renderSectionOutput($response, 'Deleting SMS with repeat');
 
 /**
 		CREATING SMS WITH REPEAT NO DATE
@@ -495,20 +516,6 @@ $batch = new Intellipush\Notification\Batch();
 		array(
 			array($countrycodeToTest,$phonenumberToTest),
 			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest)
 		)
 	)
 	->message('Hei hei! :)')
@@ -569,8 +576,8 @@ $sms->receivers(
         array($countrycodeToTest,$phonenumberToTest)
     )
 )
-->repeat('daily')
-->message('Andre melding. Sendes til 2 nye telefonnummer og skal gjentas hver dag.')
+//->repeat('daily')
+->message('Andre melding. Sendes til 2 nye telefonnummer og kan gjentas hver dag.')
 ->when(new \DateTime('+20 minutes')); // Må være i formatet 2013-04-20 22:15:00
 
 $batch->add($sms);
@@ -579,65 +586,6 @@ $response = $intellipush->create($batch);
 
 
 renderSectionOutput($response, 'Creating Batch SMS 2');
-
-
-
-
-/**
-		CREATING BATCH SUCCESS
-**/
-
-
-
-$batch = new Intellipush\Notification\Batch();
-
-	$sms = new Intellipush\Notification\Sms();
-
-	$sms->receivers(
-		array(
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest)
-		)
-	)
-	->message('Hei hei! :)')
-	->when(new \DateTime('+20 minutes'));
-
-$batch->add($sms);
-
-
-
-	$sms = new Intellipush\Notification\Sms();
-
-	$sms->receivers(
-		array(
-			array($countrycodeToTest,$phonenumberToTest)
-		)
-	)
-	->message('Hei på deg! :)')
-	->when(new \DateTime('+10 minutes'));
-
-$batch->add($sms);
-
-
-$response = $intellipush->create($batch);
-
-
-
-renderSectionOutput($response, 'Creating Batch SMS');
 
 
 
@@ -841,7 +789,18 @@ $response = $intellipush->create($sms);
 
 renderSectionOutput($response, 'Creating SMS to contact with repeat');
 
+$repeat_notification_id2 = $response->response->data->id;
 
+/**
+		CLEANING UP AND DELETING SMS TO CONTACT WITH REPEATING MESSAGE
+**/
+$sms = new Intellipush\Notification\Sms();
+
+$sms->id( $repeat_notification_id2 );
+
+$response = $intellipush->delete($sms);
+
+renderSectionOutput($response, 'Deleting SMS to contact with repeat');
 
 
 /**
@@ -856,7 +815,6 @@ $sms->message ('Hei hei! :)')
 $response = $intellipush->create($sms);
 
 renderSectionOutput($response, 'Creating SMS to contactlist');
-
 
 
 /**
@@ -875,32 +833,6 @@ $sms->message ('Hei hei! :)')
 $response = $intellipush->create($sms);
 
 renderSectionOutput($response, 'Creating SMS to contactlist with filter');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
