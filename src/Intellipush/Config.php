@@ -27,8 +27,7 @@ namespace Intellipush;
 
 class Config {
 
-    //public $endpoint = 'https://www.intellipush.com/api/';
-    public $endpoint = 'http://intellipush/api/';
+    public $endpoint = 'https://www.intellipush.com/api/';
 
     public $user          = array();
     public $notification  = array();
