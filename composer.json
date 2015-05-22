@@ -4,7 +4,7 @@
     "keywords": ["intellipush", "sdk", "php"],
     "type": "library",
     "homepage": "https://github.com/Intellipush/intellipush-php-sdk-v2",
-    "license": "https://www.intellipush.com/terms",
+    "license": "Intellipush Platform Terms",
     "authors": [
         {
             "name": "Intellipush",
