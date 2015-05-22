@@ -1,5 +1,5 @@
 {
-    "name": "kristianlunde/intellipush-php-sdk-v2",
+    "name": "intellipush/intellipush-php-sdk-v2",
     "description": "A PHP SDK for Intellipush",
     "keywords": ["intellipush", "sdk", "php"],
 	"version": "0.1.0",
