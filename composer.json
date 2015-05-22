@@ -5,8 +5,8 @@
 	"version": "0.1.0",
 	"type": "library",
     "homepage": "https://github.com/Intellipush/intellipush-php-sdk-v2",
-    "license": "https://www.intellipush.com/terms",
     "minimum-stability": "dev",
+    "license": "Intellipush Platform Terms",
     "authors": [
         {
             "name": "Intellipush",
@@ -20,5 +20,5 @@
 		"psr-0" : {
 			"Intellipush\\" : "src/"
 		}
-	}
+    }
 }
