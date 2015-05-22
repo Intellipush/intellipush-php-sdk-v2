@@ -12,7 +12,7 @@ Installation
 Usage
 -----
 
-Install the lastest version with: ``composer require monolog/monolog``
+Install the lastest version with: ``composer require intellipush/intellipush-php-sdk-v2``
 
 ```
 use Intellipush\Intellipush;
