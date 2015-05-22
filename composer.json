@@ -5,6 +5,7 @@
     "type": "library",
     "homepage": "https://github.com/Intellipush/intellipush-php-sdk-v2",
     "license": "https://www.intellipush.com/terms",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Intellipush",
