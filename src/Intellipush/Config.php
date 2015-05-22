@@ -44,6 +44,7 @@ class Config {
         $this->notification['get']             = 'notification/getNotification';
         $this->notification['getUnsent']       = 'notification/getUnsendtNotifications';
         $this->notification['getSent']         = 'notification/getSendtNotifications';
+        $this->notification['getReceived']     = 'notification/getReceivedNotifications';
         $this->notification['status']          = 'notification/getNotificationStatus';
 
         $this->contact['create']               = 'contact/createContact';

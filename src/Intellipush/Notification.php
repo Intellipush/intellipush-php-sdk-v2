@@ -97,6 +97,12 @@ abstract class Notification implements IRequest {
         }
     }
 
+    public function received ($received){
+        if ($received == true){
+            $this->notification['received'] = $received;
+        }
+    }
+
     public function page ($page){
         $this->notification['page'] = $page;
     }

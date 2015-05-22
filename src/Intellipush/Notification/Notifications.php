@@ -56,12 +56,22 @@ class Notifications extends Notification {
         $this->notification['sendt'] = $sendt;
         return $this;
     }
+    public function keyword ($keyword){
+        $this->notification['keyword'] = $keyword;
+        return $this;
+    }
+    public function secondKeyword ($secondKeyword){
+        $this->notification['secondKeyword'] = $secondKeyword;
+        return $this;
+    }
 
 
 
     public function read(HttpDispatcher $dispatcher, Config $config) {
         if (!empty($this->notification['sendt'])){
             $url = $config->notification['getSent'];   
+        } elseif (!empty($this->notification['received'])) {
+            $url = $config->notification['getReceived']; 
         } else {
             $url = $config->notification['getUnsent'];
         }

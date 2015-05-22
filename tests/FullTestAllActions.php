@@ -24,13 +24,13 @@
 
 
 /**
-		RENDERING HTML START
+        RENDERING HTML START
 **/
 include_once 'html/start.html';
 
 
 /**
-		LOADING SDK AND SETTING UP INTELLIPUSH OBJECT
+        LOADING SDK AND SETTING UP INTELLIPUSH OBJECT
 **/
 
 define('LIBRARY_PATH', '../src/');
@@ -64,16 +64,16 @@ $intellipush = new Intellipush($key, $secret);
 
 
 /**
-		CREATING SMS
+        CREATING SMS
 **/
 
 $sms = new Intellipush\Notification\Sms();
 
 $sms->receivers(
-	array(
-		array($countrycodeToTest,$phonenumberToTest),
-		array($countrycodeToTest,$phonenumberToTest)
-	)
+    array(
+        array($countrycodeToTest,$phonenumberToTest),
+        array($countrycodeToTest,$phonenumberToTest)
+    )
 )
 ->message('Hei hei! :)')
 ->when(new \DateTime('+20 minutes'));
@@ -87,7 +87,7 @@ $notification_id = $response->response[0]->data->id;
 
 
 /**
-		GETTING NOTIFICATION STATUS
+        GETTING NOTIFICATION STATUS
 **/
 
 $status = new Intellipush\Notification\Status();
@@ -100,15 +100,15 @@ renderSectionOutput($response, 'Getting Notification Status');
 
 
 /**
-		CREATING SMS WITH NO MESSAGE
+        CREATING SMS WITH NO MESSAGE
 **/
 
 $sms = new Intellipush\Notification\Sms();
 
 $sms->receivers(
-	array(
-		array($countrycodeToTest,$phonenumberToTest)
-	)
+    array(
+        array($countrycodeToTest,$phonenumberToTest)
+    )
 )
 ->when(new \DateTime('+20 minutes'));
 
@@ -119,15 +119,15 @@ renderSectionOutput($response, 'Creating SMS with no message', true, 1005);
 
 
 /**
-		CREATING SMS WITH NO SPECIFIED TIME
+        CREATING SMS WITH NO SPECIFIED TIME
 **/
 
 $sms = new Intellipush\Notification\Sms();
 
 $sms->receivers(
-	array(
-		array($countrycodeToTest,$phonenumberToTest)
-	)
+    array(
+        array($countrycodeToTest,$phonenumberToTest)
+    )
 )
 ->message('Hei hei! :)');
 
@@ -138,15 +138,15 @@ renderSectionOutput($response, 'Creating SMS with no set time');
 
 
 /**
-		CREATING SMS WITH REPEAT
+        CREATING SMS WITH REPEAT
 **/
 
 $sms = new Intellipush\Notification\Sms();
 
 $sms->receivers(
-	array(
-		array($countrycodeToTest,$phonenumberToTest)
-	)
+    array(
+        array($countrycodeToTest,$phonenumberToTest)
+    )
 )
 ->message ('Hei hei! :)')
 ->when(new \DateTime('+10 minutes'))
@@ -159,7 +159,7 @@ renderSectionOutput($response, 'Creating SMS with repeat');
 $repeat_notification_id = $response->response->data->id;
 
 /**
-		CLEANING UP AND DELETING REPEATING MESSAGE
+        CLEANING UP AND DELETING REPEATING MESSAGE
 **/
 $sms = new Intellipush\Notification\Sms();
 
@@ -170,15 +170,15 @@ $response = $intellipush->delete($sms);
 renderSectionOutput($response, 'Deleting SMS with repeat');
 
 /**
-		CREATING SMS WITH REPEAT NO DATE
+        CREATING SMS WITH REPEAT NO DATE
 **/
 
 $sms = new Intellipush\Notification\Sms();
 
 $sms->receivers(
-	array(
-		array($countrycodeToTest,$phonenumberToTest)
-	)
+    array(
+        array($countrycodeToTest,$phonenumberToTest)
+    )
 )
 ->message ('Hei hei! :)')
 ->repeat ('daily');
@@ -192,7 +192,7 @@ renderSectionOutput($response, 'Creating SMS with repeat no date', true, 407);
 
 
 /**
-		GETTING SMS
+        GETTING SMS
 **/
 
 $sms = new Intellipush\Notification\Sms();
@@ -208,7 +208,7 @@ renderSectionOutput($response, 'Reading SMS');
 
 
 /**
-		GETTING NOTIFICATION YOU DO NOT OWN
+        GETTING NOTIFICATION YOU DO NOT OWN
 **/
 
 $sms = new Intellipush\Notification\Sms();
@@ -224,7 +224,7 @@ renderSectionOutput($response, 'Reading notification you do not own', true, 401)
 
 
 /**
-		UPDATE SMS
+        UPDATE SMS
 **/
 
 $sms = new Intellipush\Notification\Sms();
@@ -242,7 +242,7 @@ renderSectionOutput($response, 'Updating SMS');
 
 
 /**
-		DELETE SMS
+        DELETE SMS
 **/
 
 $sms = new Intellipush\Notification\Sms();
@@ -257,7 +257,7 @@ renderSectionOutput($response, 'Deleting SMS');
 
 
 /**
-		CREATE CONTACT
+        CREATE CONTACT
 **/
 
 $contact = new Intellipush\Contact();
@@ -279,7 +279,7 @@ renderSectionOutput($response, 'Creating Contact');
 
 
 /**
-		CREATE ANOTHER CONTACT
+        CREATE ANOTHER CONTACT
 **/
 
 $contact = new Intellipush\Contact();
@@ -302,7 +302,7 @@ renderSectionOutput($response, 'Creating Another Contact');
 
 
 /**
-		READING CONTACT
+        READING CONTACT
 **/
 
 $contact = new Intellipush\Contact();
@@ -318,7 +318,7 @@ renderSectionOutput($response, 'Reading Contact');
 
 
 /**
-		UPDATING CONTACT
+        UPDATING CONTACT
 **/
 
 $contact = new Intellipush\Contact();
@@ -335,7 +335,7 @@ renderSectionOutput($response, 'Updating Contact');
 
 
 /**
-		READING FEMALE CONTACTS
+        READING FEMALE CONTACTS
 */
 
 $contact = new Intellipush\Contact();
@@ -353,7 +353,7 @@ renderSectionOutput($response, 'Reading female contacts');
 
 
 /**
-		CREATING CONTACTLIST
+        CREATING CONTACTLIST
 **/
 
 $contactlist = new Intellipush\Contactlist();
@@ -370,7 +370,7 @@ renderSectionOutput($response, 'Creating Contactlist');
 
 
 /**
-		READ CONTACTLIST
+        READ CONTACTLIST
 **/
 $contactlist = new Intellipush\Contactlist();
 
@@ -384,7 +384,7 @@ renderSectionOutput($response, 'Reading Contactlist');
 
 
 /**
-		UPDATING CONTACTLIST
+        UPDATING CONTACTLIST
 **/
 
 $contactlist = new Intellipush\Contactlist();
@@ -400,7 +400,7 @@ renderSectionOutput($response, 'Updating Contactlist');
 
 
 /**
-		GETTING CONTACTS IN CONTACTLIST 1
+        GETTING CONTACTS IN CONTACTLIST 1
 **/
 
 $contactlist = new Intellipush\Contactlist();
@@ -419,7 +419,7 @@ renderSectionOutput($response, 'Getting Contacts in Contactlist 1');
 
 
 /**
-		GETTING CONTACTS IN CONTACTLIST 2
+        GETTING CONTACTS IN CONTACTLIST 2
 **/
 
 $contactlist = new Intellipush\Contactlist();
@@ -437,7 +437,7 @@ renderSectionOutput($response, 'Getting Contacts in Contactlist 2');
 
 
 /**
-		GET NUMBER OF CONTACTS IN CONTACTLIST
+        GET NUMBER OF CONTACTS IN CONTACTLIST
 **/
 
 $contactlist = new Intellipush\Contactlist();
@@ -456,7 +456,7 @@ renderSectionOutput($response, 'Getting Number of Contacts in Contactlist');
 
 
 /**
-		SEARCH CONTACTS NOT IN CONTACTLIST
+        SEARCH CONTACTS NOT IN CONTACTLIST
 **/
 
 $contactlist = new Intellipush\Contactlist();
@@ -471,7 +471,7 @@ renderSectionOutput($response, 'Search Contact not in Contactlist');
 
 
 /**
-		ADD CONTACT TO CONTACTLIST
+        ADD CONTACT TO CONTACTLIST
 **/
 
 $contactlist = new Intellipush\Contactlist();
@@ -488,7 +488,7 @@ renderSectionOutput($response, 'Add Contact to Contactlist');
 
 
 /**
-		READ THE USER ACCOUNT
+        READ THE USER ACCOUNT
 **/
 
 $user = new Intellipush\User();
@@ -503,37 +503,37 @@ renderSectionOutput($response, 'Get User');
 
 
 /**
-		CREATING BATCH SUCCESS
+        CREATING BATCH SUCCESS
 **/
 
 
 
 $batch = new Intellipush\Notification\Batch();
 
-	$sms = new Intellipush\Notification\Sms();
+    $sms = new Intellipush\Notification\Sms();
 
-	$sms->receivers(
-		array(
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-		)
-	)
-	->message('Hei hei! :)')
-	->when(new \DateTime('+20 minutes'));
+    $sms->receivers(
+        array(
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+        )
+    )
+    ->message('Hei hei! :)')
+    ->when(new \DateTime('+20 minutes'));
 
 $batch->add($sms);
 
 
 
-	$sms = new Intellipush\Notification\Sms();
+    $sms = new Intellipush\Notification\Sms();
 
-	$sms->receivers(
-		array(
-			array($countrycodeToTest,$phonenumberToTest)
-		)
-	)
-	->message('Hei på deg! :)')
-	->when(new \DateTime('+10 minutes'));
+    $sms->receivers(
+        array(
+            array($countrycodeToTest,$phonenumberToTest)
+        )
+    )
+    ->message('Hei på deg! :)')
+    ->when(new \DateTime('+10 minutes'));
 
 $batch->add($sms);
 
@@ -548,7 +548,7 @@ renderSectionOutput($response, 'Creating Batch SMS 1');
 
 
 /**
-		CREATING BATCH SUCCESS 2
+        CREATING BATCH SUCCESS 2
 **/
 
 
@@ -590,76 +590,76 @@ renderSectionOutput($response, 'Creating Batch SMS 2');
 
 
 /**
-		CREATING BATCH TOO MANY
+        CREATING BATCH TOO MANY
 **/
 
 
 
 $batch = new Intellipush\Notification\Batch();
 
-	$sms = new Intellipush\Notification\Sms();
+    $sms = new Intellipush\Notification\Sms();
 
-	$sms->receivers(
-		array(
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest),
-			array($countrycodeToTest,$phonenumberToTest)
-		)
-	)
-	->message('Hei hei! :)')
-	->when(new \DateTime('+20 minutes'));
+    $sms->receivers(
+        array(
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest),
+            array($countrycodeToTest,$phonenumberToTest)
+        )
+    )
+    ->message('Hei hei! :)')
+    ->when(new \DateTime('+20 minutes'));
 
 $batch->add($sms);
 $batch->add($sms);
@@ -723,15 +723,15 @@ $batch->add($sms);
 $batch->add($sms);
 
 
-	$sms = new Intellipush\Notification\Sms();
+    $sms = new Intellipush\Notification\Sms();
 
-	$sms->receivers(
-		array(
-			array($countrycodeToTest,$phonenumberToTest)
-		)
-	)
-	->message('Hei på deg! :)')
-	->when(new \DateTime('+10 minutes'));
+    $sms->receivers(
+        array(
+            array($countrycodeToTest,$phonenumberToTest)
+        )
+    )
+    ->message('Hei på deg! :)')
+    ->when(new \DateTime('+10 minutes'));
 
 $batch->add($sms);
 
@@ -743,7 +743,7 @@ renderSectionOutput($response, 'Creating Too many in Batch', true, 410);
 
 
 /**
-		GETTING UNSENDT NOTIFICATIONS
+        GETTING UNSENDT NOTIFICATIONS
 **/
 
 $notifications = new Intellipush\Notification\Notifications();
@@ -759,7 +759,7 @@ renderSectionOutput($response, 'Getting unsendt Notifications');
 
 
 /**
-		GETTING SENDT NOTIFICATIONS
+        GETTING SENDT NOTIFICATIONS
 **/
 
 $notifications = new Intellipush\Notification\Notifications();
@@ -771,19 +771,33 @@ $response = $intellipush->read($notifications);
 renderSectionOutput($response, 'Getting sendt Notifications');
 
 
+/**
+        GETTING RECEIVED NOTIFICATIONS
+**/
+
+$notifications = new Intellipush\Notification\Notifications();
+
+$notifications->items(2)->page(1)->keyword('')->secondKeyword('')->received(true);
+
+$response = $intellipush->read($notifications);
+
+renderSectionOutput($response, 'Getting received Notifications');
+
+
+
 
 
 
 /**
-		CREATING SMS TO CONTACT WITH REPEAT
+        CREATING SMS TO CONTACT WITH REPEAT
 **/
 
 $sms = new Intellipush\Notification\Sms();
 
 $sms->message ('Hei hei! :)')
-	->contact($contact_id )
-	->when(new \DateTime('+10 minutes'))
-	->repeat ('daily');
+    ->contact($contact_id )
+    ->when(new \DateTime('+10 minutes'))
+    ->repeat ('daily');
 
 $response = $intellipush->create($sms);
 
@@ -792,7 +806,7 @@ renderSectionOutput($response, 'Creating SMS to contact with repeat');
 $repeat_notification_id2 = $response->response->data->id;
 
 /**
-		CLEANING UP AND DELETING SMS TO CONTACT WITH REPEATING MESSAGE
+        CLEANING UP AND DELETING SMS TO CONTACT WITH REPEATING MESSAGE
 **/
 $sms = new Intellipush\Notification\Sms();
 
@@ -804,13 +818,13 @@ renderSectionOutput($response, 'Deleting SMS to contact with repeat');
 
 
 /**
-		CREATING SMS TO CONTACTLIST
+        CREATING SMS TO CONTACTLIST
 **/
 
 $sms = new Intellipush\Notification\Sms();
 
 $sms->message ('Hei hei! :)')
-	->contactlist($contactlist_id );
+    ->contactlist($contactlist_id );
 
 $response = $intellipush->create($sms);
 
@@ -818,7 +832,7 @@ renderSectionOutput($response, 'Creating SMS to contactlist');
 
 
 /**
-		CREATING SMS TO CONTACTLIST WITH FILTER
+        CREATING SMS TO CONTACTLIST WITH FILTER
 **/
 
 $sms = new Intellipush\Notification\Sms();
@@ -838,7 +852,7 @@ renderSectionOutput($response, 'Creating SMS to contactlist with filter');
 
 
 /**
-		REMOVE CONTACT FROM CONTACTLIST
+        REMOVE CONTACT FROM CONTACTLIST
 **/
 
 $contactlist = new Intellipush\Contactlist();
@@ -854,7 +868,7 @@ renderSectionOutput($response, 'Remove Contact from Contactlist');
 
 
 /**
-		DELETING CONTACT
+        DELETING CONTACT
 **/
 
 $contact = new Intellipush\Contact();
@@ -870,7 +884,7 @@ renderSectionOutput($response, 'Deleting Contact');
 
 
 /**
-		DELETING CONTACTLIST
+        DELETING CONTACTLIST
 **/
 
 $contactlist = new Intellipush\Contactlist();
@@ -895,7 +909,7 @@ renderSectionOutput($response, 'Deleting Contactlist');
 
 
 /**
-		RENDERING HTML END
+        RENDERING HTML END
 **/
 
 
@@ -905,41 +919,41 @@ $techname = preg_replace('/\s+/', '', $name);
 $errorMessage = '';
 if (is_array($response->success)){
 
-	$error = false;
-	foreach ( $response->success as $success ) {
-		if ( $success != true){
-			$error = true;
-		} else {
-			$error = false;
-		}
-	}
+    $error = false;
+    foreach ( $response->success as $success ) {
+        if ( $success != true){
+            $error = true;
+        } else {
+            $error = false;
+        }
+    }
 } else {
-	if ( $response->success != true){
-		$error = true;
-	} else {
-		$error = false;
-	}
+    if ( $response->success != true){
+        $error = true;
+    } else {
+        $error = false;
+    }
 }
 
 if ($expectError == true && $error == true) {
-	if ($response->errorcode = $expectedErrorID){
-		$error = false;
-	}
+    if ($response->errorcode = $expectedErrorID){
+        $error = false;
+    }
 }
 
 if (empty($response->message) == true){
-	$error = true;
-	$errorMessage = 'Missing message';
+    $error = true;
+    $errorMessage = 'Missing message';
 }
 
 
 if ($error == true){
-		echo '				<button class="btn btn-danger btn-ip btn-lg" type="button" data-toggle="collapse" data-target="#collapse'.$techname.'" aria-expanded="false" aria-controls="collapse'.$techname.'">
+        echo '              <button class="btn btn-danger btn-ip btn-lg" type="button" data-toggle="collapse" data-target="#collapse'.$techname.'" aria-expanded="false" aria-controls="collapse'.$techname.'">
   '.$name.'
 </button>
 ';
-	} else {
-		echo '				<button class="btn btn-success btn-ip btn-lg" type="button" data-toggle="collapse" data-target="#collapse'.$techname.'" aria-expanded="false" aria-controls="collapse'.$techname.'">
+    } else {
+        echo '              <button class="btn btn-success btn-ip btn-lg" type="button" data-toggle="collapse" data-target="#collapse'.$techname.'" aria-expanded="false" aria-controls="collapse'.$techname.'">
   '.$name.'
 </button>
 ';
@@ -948,37 +962,37 @@ if ($error == true){
 echo '
 <div class="collapse pull-left" id="collapse'.$techname.'">
   <div class="well">
-  	<pre>
+    <pre>
 ';
 if ($error == true) {
-	echo '<br />';
-	echo $errorMessage;
-	echo '<br /><br /><br />';
+    echo '<br />';
+    echo $errorMessage;
+    echo '<br /><br /><br />';
 }
 print_r($response);
 echo '
-	</pre>
+    </pre>
   </div>
 </div>
 ';
 
 /*
-	echo '			</div>
+    echo '          </div>
 ';*/
-	echo '			<script>updateProgressBar();</script>
+    echo '          <script>updateProgressBar();</script>
 ';
 if ($error == true){
-	echo '			<script>updateErrorBar();</script>
+    echo '          <script>updateErrorBar();</script>
 ';
 } else {
-	echo '			<script>updateSuccessBar();</script>
+    echo '          <script>updateSuccessBar();</script>
 ';
 }
 
 
-	ob_flush();
-	flush();
-	usleep(10000); // Waiting 10 Milliseconds
+    ob_flush();
+    flush();
+    usleep(10000); // Waiting 10 Milliseconds
 
 }
 
