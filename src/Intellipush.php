@@ -53,7 +53,7 @@ class Intellipush {
     }
 
     static public function auth($appId, $apiSecret) {
-        return new \Intellipush($appId, $apiSecret);
+        return new \Intellipush\Intellipush($appId, $apiSecret);
     }
 
 
