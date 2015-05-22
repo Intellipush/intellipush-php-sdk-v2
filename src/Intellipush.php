@@ -1,4 +1,4 @@
-<?php
+<?php namespace Intellipush;
 /**
 * Copyright 2015 Intellipush AS.
 *
@@ -8,7 +8,7 @@
 * Intellipush.
 *
 * As with any software that integrates with the Intellipush platform, your use
-* of this software is subject to the Intellipush terms 
+* of this software is subject to the Intellipush terms
 * here [https://www.intellipush.com/terms/]. This copyright notice
 * shall be included in all copies or substantial portions of the software.
 *
@@ -80,7 +80,7 @@ class Intellipush {
      * @param int $id
      * @return mixed
      */
-    public function getContact($id) { 
+    public function getContact($id) {
         return $this->read(new Contact($id));
     }
 
@@ -127,7 +127,7 @@ class Intellipush {
      * @param int $id
      * @return mixed
      */
-    public function getContactlist($id) { 
+    public function getContactlist($id) {
         return $this->read(new Contactlist($id));
     }
 
