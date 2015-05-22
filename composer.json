@@ -1,8 +1,9 @@
 {
-    "name": "Intellipush/intellipush-php-sdk-v2",
+    "name": "kristianlunde/intellipush-php-sdk-v2",
     "description": "A PHP SDK for Intellipush",
     "keywords": ["intellipush", "sdk", "php"],
-    "type": "library",
+	"version": "0.1.0",
+	"type": "library",
     "homepage": "https://github.com/Intellipush/intellipush-php-sdk-v2",
     "license": "https://www.intellipush.com/terms",
     "minimum-stability": "dev",
@@ -14,5 +15,10 @@
     ],
     "require": {
         "php": ">=5.3.0"
-    }
+    },
+	"autoload" : {
+		"psr-0" : {
+			"Intellipush\\" : "src/"
+		}
+	}
 }
