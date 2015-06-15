@@ -23,10 +23,15 @@
 */
 
 
+use Intellipush\Notification\Notifications;
+
+
+// YOU CAN COPY EVERYTHING FROM "00-config.php" AND PASTE IT HERE INSTEAD
 include_once '00-config.php';
 
 
-$notifications = new Intellipush\Notification\Notifications();
+
+$notifications = new Notifications();
 
 $notifications->items(20)->page(1)->keyword('')->secondKeyword('')->received(true); // Empty keyword returns every received message
 

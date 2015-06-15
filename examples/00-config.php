@@ -1,4 +1,4 @@
-<?php
+<?php 
 /**
 * Copyright 2015 Intellipush AS.
 *
@@ -22,18 +22,15 @@
 *
 */
 
-define('LIBRARY_PATH', '../src/');
+use Intellipush\Intellipush;
 
-spl_autoload_extensions('.php');
-spl_autoload_register(function($class) {
-    $class = str_replace('\\', '/', $class);
-    #echo 'trying ' . LIBRARY_PATH . $class . '.php' . PHP_EOL;
-    if(is_readable(LIBRARY_PATH  . $class . '.php')) {
-        require_once  LIBRARY_PATH . $class . '.php';
-    }
-});
+$applicationPath = __DIR__ . '/../../../../';
+
+require_once $applicationPath . 'vendor/autoload.php';
+
 
 $key = 'xxxxxxx';
-$secret = 'yyyyyyyyyyyyyyyyyyyyy';
+$secret = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz';
 
 $intellipush = new Intellipush($key, $secret);
+

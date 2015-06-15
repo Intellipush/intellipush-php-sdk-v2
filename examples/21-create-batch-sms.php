@@ -22,12 +22,20 @@
 *
 */
 
+use Intellipush\Notification\Batch;
+use Intellipush\Notification\Sms;
+
+
+// YOU CAN COPY EVERYTHING FROM "00-config.php" AND PASTE IT HERE INSTEAD
 include_once '00-config.php';
 
 
-$batch = new Intellipush\Notification\Batch();
+$contact = new Contact();
 
-	$sms = new Intellipush\Notification\Sms();
+
+$batch = new Batch();
+
+	$sms = new Sms();
 
 	$sms->receivers(
 		array(
@@ -144,7 +152,7 @@ $batch->add($sms);
 $batch->add($sms);
 
 
-	$sms = new Intellipush\Notification\Sms();
+	$sms = new Sms();
 
 	$sms->receivers(
 		array(

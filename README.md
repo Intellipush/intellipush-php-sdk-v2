@@ -12,17 +12,25 @@ Installation
 Usage
 -----
 
-Install the lastest version with: ``composer require intellipush/intellipush-php-sdk-v2``
+Install the lastest version with: ``composer require 'intellipush/intellipush-php-sdk-v2:dev-master'``
+
+If you need help getting started with Composer:
+[click here](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 
 ```
+$applicationPath = __DIR__ . '/../YOUR APPLICATION PATH';
+
+require_once $applicationPath . 'vendor/autoload.php';
+
 use Intellipush\Intellipush;
 
 $key = 'YOUR KEY';
 $secret = 'YOUR SECRET';
-$phoneNumber = '004799988777';
+$countrycode = '0047';
+$phoneNumber = 'xxxxxxxx';
 
 //Send an SMS
-$response = Intellipush::auth($key, $secret)->sms('Hello World.', $phoneNumber);
+$response = Intellipush::auth($key, $secret)->sms('Hello World.', $countrycode, $phoneNumber);
 
 var_dump($response);
 

@@ -22,6 +22,7 @@
 *
 */
 
+// YOU CAN COPY EVERYTHING FROM "00-config.php" AND PASTE IT HERE INSTEAD
 include_once '00-config.php';
 
 $response = Intellipush::auth($key, $secret)->contact('Contact', '0047', 'xxxxxxxx', 'xxx.yyy@example.com');

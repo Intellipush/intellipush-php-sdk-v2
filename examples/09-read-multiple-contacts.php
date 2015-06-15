@@ -22,11 +22,17 @@
 *
 */
 
+use Intellipush\Contact;
+use Intellipush\Contact\Filter;
+
+
+// YOU CAN COPY EVERYTHING FROM "00-config.php" AND PASTE IT HERE INSTEAD
 include_once '00-config.php';
 
-$contact = new Intellipush\Contact();
 
-$contactfilter = new Intellipush\Contact\Filter();
+$contact = new Contact();
+
+$contactfilter = new Filter();
 
 $contact->items(2)->page(1)->query('xyz')->contactFilter($contactfilter);
 

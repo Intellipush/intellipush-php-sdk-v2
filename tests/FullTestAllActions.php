@@ -33,16 +33,19 @@ include_once 'html/start.html';
         LOADING SDK AND SETTING UP INTELLIPUSH OBJECT
 **/
 
-define('LIBRARY_PATH', '../src/');
+use Intellipush\Intellipush;
+use Intellipush\Notification\Sms;
+use Intellipush\Notification\Batch;
+use Intellipush\Notification\Status;
+use Intellipush\Notification\Notifications;
+use Intellipush\Contact;
+use Intellipush\Contact\Filter;
+use Intellipush\Contactlist;
+use Intellipush\User;
 
-spl_autoload_extensions('.php');
-spl_autoload_register(function($class) {
-    $class = str_replace('\\', '/', $class);
-    #echo 'trying ' . LIBRARY_PATH . $class . '.php' . PHP_EOL;
-    if(is_readable(LIBRARY_PATH  . $class . '.php')) {
-        require_once  LIBRARY_PATH . $class . '.php';
-    }
-});
+$applicationPath = __DIR__ . '/../../../../';
+
+require_once $applicationPath . 'vendor/autoload.php';
 
 
 // ###########################################################################
@@ -54,10 +57,10 @@ spl_autoload_register(function($class) {
 // ###########################################################################
 
 
-$key = 'xxxxxxxxx';
-$secret = 'yyyyyyyyyyyyyyyyyyyyyyyyy';
+$key = 'xxxxxxx';
+$secret = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz';
 $countrycodeToTest = '0047';
-$phonenumberToTest = 'ZZZZZZZZ';
+$phonenumberToTest = 'yyyyyyyy';
 
 $intellipush = new Intellipush($key, $secret);
 
@@ -67,7 +70,7 @@ $intellipush = new Intellipush($key, $secret);
         CREATING SMS
 **/
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->receivers(
     array(
@@ -90,7 +93,7 @@ $notification_id = $response->response[0]->data->id;
         GETTING NOTIFICATION STATUS
 **/
 
-$status = new Intellipush\Notification\Status();
+$status = new Status();
 
 $status->id([$notification_id]);
 
@@ -103,7 +106,7 @@ renderSectionOutput($response, 'Getting Notification Status');
         CREATING SMS WITH NO MESSAGE
 **/
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->receivers(
     array(
@@ -122,7 +125,7 @@ renderSectionOutput($response, 'Creating SMS with no message', true, 1005);
         CREATING SMS WITH NO SPECIFIED TIME
 **/
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->receivers(
     array(
@@ -141,7 +144,7 @@ renderSectionOutput($response, 'Creating SMS with no set time');
         CREATING SMS WITH REPEAT
 **/
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->receivers(
     array(
@@ -161,7 +164,7 @@ $repeat_notification_id = $response->response->data->id;
 /**
         CLEANING UP AND DELETING REPEATING MESSAGE
 **/
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->id( $repeat_notification_id );
 
@@ -173,7 +176,7 @@ renderSectionOutput($response, 'Deleting SMS with repeat');
         CREATING SMS WITH REPEAT NO DATE
 **/
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->receivers(
     array(
@@ -195,7 +198,7 @@ renderSectionOutput($response, 'Creating SMS with repeat no date', true, 407);
         GETTING SMS
 **/
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->id($notification_id);
 
@@ -211,7 +214,7 @@ renderSectionOutput($response, 'Reading SMS');
         GETTING NOTIFICATION YOU DO NOT OWN
 **/
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->id(1234567890);
 
@@ -227,7 +230,7 @@ renderSectionOutput($response, 'Reading notification you do not own', true, 401)
         UPDATE SMS
 **/
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->id( $notification_id )
 ->message('Hello! This is an updated notification!')
@@ -245,7 +248,7 @@ renderSectionOutput($response, 'Updating SMS');
         DELETE SMS
 **/
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->id( $notification_id );
 
@@ -260,7 +263,7 @@ renderSectionOutput($response, 'Deleting SMS');
         CREATE CONTACT
 **/
 
-$contact = new Intellipush\Contact();
+$contact = new Contact();
 
 $contact->name('Girly Girl')
 ->countrycode($countrycodeToTest)
@@ -282,7 +285,7 @@ renderSectionOutput($response, 'Creating Contact');
         CREATE ANOTHER CONTACT
 **/
 
-$contact = new Intellipush\Contact();
+$contact = new Contact();
 
 $contact->name('Manly Man')
 ->countrycode($countrycodeToTest)
@@ -305,7 +308,7 @@ renderSectionOutput($response, 'Creating Another Contact');
         READING CONTACT
 **/
 
-$contact = new Intellipush\Contact();
+$contact = new Contact();
 
 $contact->id($contact_id);
 
@@ -321,7 +324,7 @@ renderSectionOutput($response, 'Reading Contact');
         UPDATING CONTACT
 **/
 
-$contact = new Intellipush\Contact();
+$contact = new Contact();
 
 $contact->id($contact_id2)
 ->name('Updated Manly Man');
@@ -338,9 +341,9 @@ renderSectionOutput($response, 'Updating Contact');
         READING FEMALE CONTACTS
 */
 
-$contact = new Intellipush\Contact();
+$contact = new Contact();
 
-$contactfilter = new Intellipush\Contact\Filter();
+$contactfilter = new Filter();
 $contactfilter->sex('female');
 
 $contact->items(20)->page(1)->query('')->contactFilter($contactfilter);
@@ -356,7 +359,7 @@ renderSectionOutput($response, 'Reading female contacts');
         CREATING CONTACTLIST
 **/
 
-$contactlist = new Intellipush\Contactlist();
+$contactlist = new Contactlist();
 
 $contactlist->name('newList');
 
@@ -372,7 +375,7 @@ renderSectionOutput($response, 'Creating Contactlist');
 /**
         READ CONTACTLIST
 **/
-$contactlist = new Intellipush\Contactlist();
+$contactlist = new Contactlist();
 
 $contactlist->id( $contactlist_id );
 
@@ -387,7 +390,7 @@ renderSectionOutput($response, 'Reading Contactlist');
         UPDATING CONTACTLIST
 **/
 
-$contactlist = new Intellipush\Contactlist();
+$contactlist = new Contactlist();
 
 $contactlist->id( $contactlist_id )->name('Advanced Contactlist');
 
@@ -403,9 +406,9 @@ renderSectionOutput($response, 'Updating Contactlist');
         GETTING CONTACTS IN CONTACTLIST 1
 **/
 
-$contactlist = new Intellipush\Contactlist();
+$contactlist = new Contactlist();
 
-$contactfilter = new Intellipush\Contact\Filter();
+$contactfilter = new Filter();
 //$contactfilter->sex('female');
 //$contactfilter->age('18,20,23,30-40,45');
 
@@ -422,9 +425,9 @@ renderSectionOutput($response, 'Getting Contacts in Contactlist 1');
         GETTING CONTACTS IN CONTACTLIST 2
 **/
 
-$contactlist = new Intellipush\Contactlist();
+$contactlist = new Contactlist();
 
-$contactfilter = new Intellipush\Contact\Filter();
+$contactfilter = new Filter();
 $contactfilter->sex('female');
 
 $contactlist->id( $contactlist_id )->items('2')->page('2')->query('')->contactFilter($contactfilter);
@@ -440,9 +443,9 @@ renderSectionOutput($response, 'Getting Contacts in Contactlist 2');
         GET NUMBER OF CONTACTS IN CONTACTLIST
 **/
 
-$contactlist = new Intellipush\Contactlist();
+$contactlist = new Contactlist();
 
-$contactfilter = new Intellipush\Contact\Filter();
+$contactfilter = new Filter();
 //$contactfilter->sex('female');
 //$contactfilter->age('18,20,23,30-40,45');
 
@@ -459,7 +462,7 @@ renderSectionOutput($response, 'Getting Number of Contacts in Contactlist');
         SEARCH CONTACTS NOT IN CONTACTLIST
 **/
 
-$contactlist = new Intellipush\Contactlist();
+$contactlist = new Contactlist();
 
 $contactlist->id ( $contactlist_id )->items(2)->page(1)->query('st')->notInContactlist(true);
 
@@ -474,7 +477,7 @@ renderSectionOutput($response, 'Search Contact not in Contactlist');
         ADD CONTACT TO CONTACTLIST
 **/
 
-$contactlist = new Intellipush\Contactlist();
+$contactlist = new Contactlist();
 
 $contactlist->id ( $contactlist_id )->contactId( $contact_id );
 
@@ -491,7 +494,7 @@ renderSectionOutput($response, 'Add Contact to Contactlist');
         READ THE USER ACCOUNT
 **/
 
-$user = new Intellipush\User();
+$user = new User();
 
 $response = $intellipush->read($user);
 
@@ -508,9 +511,9 @@ renderSectionOutput($response, 'Get User');
 
 
 
-$batch = new Intellipush\Notification\Batch();
+$batch = new Batch();
 
-    $sms = new Intellipush\Notification\Sms();
+    $sms = new Sms();
 
     $sms->receivers(
         array(
@@ -525,7 +528,7 @@ $batch->add($sms);
 
 
 
-    $sms = new Intellipush\Notification\Sms();
+    $sms = new Sms();
 
     $sms->receivers(
         array(
@@ -552,9 +555,9 @@ renderSectionOutput($response, 'Creating Batch SMS 1');
 **/
 
 
-$batch = new Intellipush\Notification\Batch();
+$batch = new Batch();
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->receivers(
     array(
@@ -568,7 +571,7 @@ $sms->receivers(
 $batch->add($sms);
 
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->receivers(
     array(
@@ -595,9 +598,9 @@ renderSectionOutput($response, 'Creating Batch SMS 2');
 
 
 
-$batch = new Intellipush\Notification\Batch();
+$batch = new Batch();
 
-    $sms = new Intellipush\Notification\Sms();
+    $sms = new Sms();
 
     $sms->receivers(
         array(
@@ -723,7 +726,7 @@ $batch->add($sms);
 $batch->add($sms);
 
 
-    $sms = new Intellipush\Notification\Sms();
+    $sms = new Sms();
 
     $sms->receivers(
         array(
@@ -746,7 +749,7 @@ renderSectionOutput($response, 'Creating Too many in Batch', true, 410);
         GETTING UNSENDT NOTIFICATIONS
 **/
 
-$notifications = new Intellipush\Notification\Notifications();
+$notifications = new Notifications();
 
 $notifications->items(2)->page(1);
 
@@ -762,7 +765,7 @@ renderSectionOutput($response, 'Getting unsendt Notifications');
         GETTING SENDT NOTIFICATIONS
 **/
 
-$notifications = new Intellipush\Notification\Notifications();
+$notifications = new Notifications();
 
 $notifications->items(2)->page(1)->sendt(true);
 
@@ -775,7 +778,7 @@ renderSectionOutput($response, 'Getting sendt Notifications');
         GETTING RECEIVED NOTIFICATIONS
 **/
 
-$notifications = new Intellipush\Notification\Notifications();
+$notifications = new Notifications();
 
 $notifications->items(2)->page(1)->keyword('')->secondKeyword('')->received(true);
 
@@ -792,7 +795,7 @@ renderSectionOutput($response, 'Getting received Notifications');
         CREATING SMS TO CONTACT WITH REPEAT
 **/
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->message ('Hei hei! :)')
     ->contact($contact_id )
@@ -808,7 +811,7 @@ $repeat_notification_id2 = $response->response->data->id;
 /**
         CLEANING UP AND DELETING SMS TO CONTACT WITH REPEATING MESSAGE
 **/
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->id( $repeat_notification_id2 );
 
@@ -821,7 +824,7 @@ renderSectionOutput($response, 'Deleting SMS to contact with repeat');
         CREATING SMS TO CONTACTLIST
 **/
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->message ('Hei hei! :)')
     ->contactlist($contactlist_id );
@@ -835,9 +838,9 @@ renderSectionOutput($response, 'Creating SMS to contactlist');
         CREATING SMS TO CONTACTLIST WITH FILTER
 **/
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
-$contactfilter = new Intellipush\Contact\Filter();
+$contactfilter = new Filter();
 $contactfilter->sex('female');
 
 $sms->message ('Hei hei! :)')
@@ -855,7 +858,7 @@ renderSectionOutput($response, 'Creating SMS to contactlist with filter');
         REMOVE CONTACT FROM CONTACTLIST
 **/
 
-$contactlist = new Intellipush\Contactlist();
+$contactlist = new Contactlist();
 
 $contactlist->id ( $contactlist_id )->contactId( $contact_id );
 
@@ -871,7 +874,7 @@ renderSectionOutput($response, 'Remove Contact from Contactlist');
         DELETING CONTACT
 **/
 
-$contact = new Intellipush\Contact();
+$contact = new Contact();
 
 $contact->id($contact_id);
 
@@ -887,7 +890,7 @@ renderSectionOutput($response, 'Deleting Contact');
         DELETING CONTACTLIST
 **/
 
-$contactlist = new Intellipush\Contactlist();
+$contactlist = new Contactlist();
 
 $contactlist->id( $contactlist_id );
 

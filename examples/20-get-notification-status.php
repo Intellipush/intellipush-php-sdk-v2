@@ -22,10 +22,14 @@
 *
 */
 
+use Intellipush\Notification\Status;
+
+
+// YOU CAN COPY EVERYTHING FROM "00-config.php" AND PASTE IT HERE INSTEAD
 include_once '00-config.php';
 
 
-$status = new Intellipush\Notification\Status();
+$status = new Status();
 
 $status->id([X,Y,Z]); // ID ARRAY [1,2,3,4,5]
 

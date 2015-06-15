@@ -22,9 +22,14 @@
 *
 */
 
+use Intellipush\User;
+
+
+// YOU CAN COPY EVERYTHING FROM "00-config.php" AND PASTE IT HERE INSTEAD
 include_once '00-config.php';
 
-$user = new Intellipush\User();
+
+$user = new User();
 
 $response = $intellipush->read($user);
 

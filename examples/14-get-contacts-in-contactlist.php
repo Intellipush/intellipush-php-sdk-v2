@@ -22,11 +22,17 @@
 *
 */
 
+use Intellipush\Contactlist;
+use Intellipush\Contact\Filter;
+
+
+// YOU CAN COPY EVERYTHING FROM "00-config.php" AND PASTE IT HERE INSTEAD
 include_once '00-config.php';
 
-$contactlist = new Intellipush\Contactlist();
 
-$contactfilter = new Intellipush\Contact\Filter();
+$contactlist = new Contactlist();
+
+$contactfilter = new Filter();
 //$contactfilter->sex('female');
 //$contactfilter->age('18,20,23,30-40,45');
 

@@ -23,10 +23,14 @@
 */
 
 
+use Intellipush\Notification\Sms;
+
+
+// YOU CAN COPY EVERYTHING FROM "00-config.php" AND PASTE IT HERE INSTEAD
 include_once '00-config.php';
 
 
-$sms = new Intellipush\Notification\Sms();
+$sms = new Sms();
 
 $sms->id(X);
 

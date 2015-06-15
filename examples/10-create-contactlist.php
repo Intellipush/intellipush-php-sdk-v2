@@ -22,9 +22,14 @@
 *
 */
 
+use Intellipush\Contactlist;
+
+
+// YOU CAN COPY EVERYTHING FROM "00-config.php" AND PASTE IT HERE INSTEAD
 include_once '00-config.php';
 
-$contactlist = new Intellipush\Contactlist();
+
+$contactlist = new Contactlist();
 
 $contactlist->name('New List');
 
