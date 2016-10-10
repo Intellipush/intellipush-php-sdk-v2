@@ -63,6 +63,12 @@ class Config {
         $this->contactlist['getContactsNotIn'] = 'contactlist/searchContactsNotInContactlist';
         $this->contactlist['addContact']       = 'contactlist/addContactToContactlist';
         $this->contactlist['removeContact']    = 'contactlist/removeContactFromContactlist';
+
+        $this->url['create']                   = 'url/generateShortUrl';
+        $this->url['createChild']              = 'url/generateChildUrl';
+        $this->url['get']                      = 'url/getUrlDetailsById';
+        $this->url['getByShorturl']            = 'url/getDetailsByShortUrl';
+        $this->url['getAll']                   = 'url/getAll';
     }
 
 } 
