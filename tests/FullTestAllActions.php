@@ -42,6 +42,7 @@ use Intellipush\Contact;
 use Intellipush\Contact\Filter;
 use Intellipush\Contactlist;
 use Intellipush\User;
+use Intellipush\Url;
 
 $applicationPath = __DIR__ . '/../../../../';
 
@@ -56,9 +57,9 @@ require_once $applicationPath . 'vendor/autoload.php';
 // ------------------------        WARNING
 // ###########################################################################
 
-
 $key = 'xxxxxxx';
 $secret = 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz';
+
 $countrycodeToTest = '0047';
 $phonenumberToTest = 'yyyyyyyy';
 
@@ -82,6 +83,11 @@ $sms->receivers(
 ->when(new \DateTime('+20 minutes'));
 
 $response = $intellipush->create($sms);
+
+if ($response->httpStatusCode != 200){
+    echo '<h3>You have to whitelist your IP, and doublecheck your API key and security credentials.</h3>';
+    die();
+}
 
 renderSectionOutput($response, 'Creating SMS');
 
@@ -897,6 +903,113 @@ $contactlist->id( $contactlist_id );
 $response = $intellipush->delete($contactlist);
 
 renderSectionOutput($response, 'Deleting Contactlist');
+
+
+
+
+/**
+        CREATING SHORT URL
+**/
+
+$url = new Url();
+
+$url->longUrl("https://www.intellipush.com");
+ 
+$response = $intellipush->create($url);
+
+renderSectionOutput($response, 'Creating short URL');
+
+$parentUrlId = $response->response->data->id;
+
+
+
+
+/**
+        CREATING CHILD SHORT URL
+**/
+
+$url = new Url();
+$url->parentUrlId($parentUrlId); // You must have first created a parent short url to be able to reference it.
+ 
+$target = []; 
+$target["contact_id"] = ""; // Optional
+$target["email"] = "";  // Optional
+$target["countrycode"] = $countrycodeToTest; // Optional
+$target["phonenumber"] = $phonenumberToTest; // Optional
+ 
+$url->target($target); // Optional, and only if you want to be able to track a users 
+ 
+$response = $intellipush->create($url);
+
+$childUrlId = $response->response->data->id;
+
+renderSectionOutput($response, 'Creating child short URL');
+
+
+
+
+/**
+        GET URL DETAILS
+**/
+
+$url = new Url();
+$url->id($childUrlId); 
+
+$response = $intellipush->read($url);
+
+$childUrl = $response->response->data->short_url;
+
+renderSectionOutput($response, 'Getting child URL details');
+
+
+
+
+/**
+        GET URL DETAILS
+**/
+
+$url = new Url();
+ 
+$url->includeChildren(true); // Skip this if you only want to list parent URLs.
+
+$target = []; 
+$target["contact_id"] = ""; // Optional
+$target["email"] = "";  // Optional
+$target["countrycode"] = $countrycodeToTest; // Optional
+$target["phonenumber"] = $phonenumberToTest; // Optional
+ 
+$url->target($target);
+ 
+ 
+$url->items(50);
+$url->page(1);
+ 
+ 
+$response = $intellipush->read($url);
+
+renderSectionOutput($response, 'Getting all URLs to your phonenumber');
+
+
+
+
+/**
+        CREATING SMS WITH SHORT URL FOR YOU TO TEST FROM MOBILE
+**/
+
+$sms = new Sms();
+
+$sms->receivers(
+    array(
+        array($countrycodeToTest,$phonenumberToTest)
+    )
+)
+->message('Woah, check this: ' . $childUrl . ' <- This should lead you to https://www.intellipush.com.');
+
+$response = $intellipush->create($sms);
+
+renderSectionOutput($response, 'Creating SMS with short URL.');
+
+
 
 
 
