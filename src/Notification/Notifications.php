@@ -56,6 +56,10 @@ class Notifications extends Notification {
         $this->notification['sendt'] = $sendt;
         return $this;
     }
+    public function sent ($sent){
+        $this->notification['sendt'] = $sent;
+        return $this;
+    }
     public function keyword ($keyword){
         $this->notification['keyword'] = $keyword;
         return $this;
