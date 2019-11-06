@@ -32,7 +32,7 @@ class Environment {
         $this->checkPHPVersion(self::REQUIRED_PHP_VERSION);
 		$this->hasExtension('curl');
         $this->hasExtension('json');
-        $this->hasExtension('mcrypt');
+        $this->hasExtension('openssl');
 		return true;
     }
 

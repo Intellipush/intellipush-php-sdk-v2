@@ -28,6 +28,7 @@ use Intellipush\Environment,
     Intellipush\Contact,
     Intellipush\Contactlist,
     Intellipush\User,
+    Intellipush\Statistics,
     Intellipush\Notification\Sms,
     Intellipush\Request\IRequest,
     Intellipush\HttpDispatcher,
@@ -142,6 +143,15 @@ class Intellipush {
         $contactlist = new Contactlist();
         $contactlist->getContactlists($items, $page);
         return $this->read($contactlist);
+    }
+
+    /**
+     * Helper method to help getting user statistics 
+     *
+     * @return mixed
+     */
+    public function getStatistics() {
+        return $this->read(new Statistics());
     }
 
     /**

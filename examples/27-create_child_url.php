@@ -31,13 +31,13 @@ include_once '00-config.php';
 
 
 $url = new Url();
-$url->parentUrlId('X'); // You must have first created a parent short url to be able to reference it.
+$url->parentUrlId('48'); // You must have first created a parent short url to be able to reference it.
 
 $target = []; 
 $target['contact_id'] = ''; // Optional
 $target['email'] = '';	// Optional
 $target['countrycode'] = '0047'; // Optional
-$target['phonenumber'] = 'xxxxxxxx'; // Optional
+$target['phonenumber'] = 'xxxxxx'; // Optional
 
 $url->target($target); // Optional, and only if you want to be able to track a users 
 

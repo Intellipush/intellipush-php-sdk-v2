@@ -22,65 +22,52 @@
 *
 */
 
-namespace Intellipush\Notification;
+namespace Intellipush\Contact;
 
 
-use Intellipush\Notification,
+use Intellipush\Contact,
     Intellipush\Contact\Filter,
     Intellipush\Request\IRequest,
     Intellipush\HttpDispatcher,
     Intellipush\Config;
 
-class Notifications extends Notification {
+class BatchImport extends Contact {
+
+    protected $batch;
 
     public function __construct() {
-    	$this->notification = []; // Resetting the 
+        $this->batch['batch'] = array();
+        $this->batch['import_type'] = 'contactlist_new';
+        $this->batch['contactlist_name'] = 'Import ' . date('d M Y H:i');
+        $this->batch['contactlist_id'] = '';
     }
 
-    public function items ($items){
-        $this->notification['items'] = $items;
-        return $this;
-    }
-
-    public function page ($page){
-        $this->notification['page'] = $page;
-        return $this;
-    }
-
-    public function method ($method){
-        $this->notification['method'] = $method;
-        return $this;
-    }
-
-    public function sendt ($sendt){
-        $this->notification['sendt'] = $sendt;
-        return $this;
-    }
-    public function keyword ($keyword){
-        $this->notification['keyword'] = $keyword;
-        return $this;
-    }
-    public function secondKeyword ($secondKeyword){
-        $this->notification['secondKeyword'] = $secondKeyword;
-        return $this;
-    }
-
-
-
-    public function read(HttpDispatcher $dispatcher, Config $config) {
-        if (!empty($this->notification['sendt'])){
-            $url = $config->notification['getSent'];   
-        } elseif (!empty($this->notification['received'])) {
-            $url = $config->notification['getReceived']; 
-        } else {
-            $url = $config->notification['getUnsent'];
+    public function add($contact) {
+        $contact = $contact->build();
+        foreach ($contact as $k => $v){
+            if ( !isset($v) ) {
+                unset ($contact[$k]);
+            }
         }
+        $this->batch['batch'][] = $contact;
 
-        return $dispatcher->post($url, $this->notification);
+        return $this;
     }
+
+    public function importToContactlistId($contactlist_id) {
+        $this->batch['import_type'] = 'contactlist_existing';
+        $this->batch['contactlist_id'] = $contactlist_id;
+        return $this;
+    }
+    public function importToNewContactlist($contactlist_name) {
+        $this->batch['import_type'] = 'contactlist_new';
+        $this->batch['contactlist_name'] = $contactlist_name;
+        return $this;
+    }
+
 
     public function create(HttpDispatcher $dispatcher, Config $config) {
-        // BLANK
+        return $dispatcher->post($config->contact['createBatch'], $this->batch);
     }
 
 }

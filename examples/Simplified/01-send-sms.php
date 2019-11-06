@@ -25,6 +25,8 @@
 // YOU CAN COPY EVERYTHING FROM "00-config.php" AND PASTE IT HERE INSTEAD
 include_once '00-config.php';
 
+use Intellipush\Intellipush;
+
 $response = Intellipush::auth($key, $secret)->sms('Message sendt now.', '0047', 'xxxxxxxx');
 
 echo '<pre>';

@@ -24,10 +24,10 @@
 
 use Intellipush\Intellipush;
 
-$applicationPath = __DIR__ . '/../../../../';
+$applicationPath = __DIR__ . '/../../../../../';
 
 require_once $applicationPath . 'vendor/autoload.php';
 
 
-$key = 'xxxxxxx';
-$secret = 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy';
+$key = '1200158';
+$secret = 'd8e8d898471217f0be84155df31b9b79';

@@ -33,6 +33,7 @@ class Config {
     public $notification  = array();
     public $contact       = array();
     public $contactlist   = array();
+    public $url           = array();
 
     public function __construct (){
         $this->user['get']                     = 'user';
@@ -48,9 +49,11 @@ class Config {
         $this->notification['status']          = 'notification/getNotificationStatus';
 
         $this->contact['create']               = 'contact/createContact';
+        $this->contact['createBatch']          = 'contact/batchCreateContacts';
         $this->contact['update']               = 'contact/updateContact';
         $this->contact['delete']               = 'contact/deleteContact';
         $this->contact['get']                  = 'contact/getContact';
+        $this->contact['getByPhonenumber']     = 'contact/getContactByPhonenumber';
         $this->contact['getContacts']          = 'contact/getContacts';
 
         $this->contactlist['create']           = 'contactlist/createContactlist';
@@ -69,6 +72,13 @@ class Config {
         $this->url['get']                      = 'url/getUrlDetailsById';
         $this->url['getByShorturl']            = 'url/getDetailsByShortUrl';
         $this->url['getAll']                   = 'url/getAll';
+
+        $this->statistics['get']               = 'statistics';
+
+        $this->twofactor['generate']           = 'twofactor/send2FaCode';
+        $this->twofactor['validate']           = 'twofactor/check2FaCode';
+
+
     }
 
 } 

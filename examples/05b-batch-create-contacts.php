@@ -23,18 +23,36 @@
 */
 
 use Intellipush\Contact;
+use Intellipush\Contact\BatchImport;
 
 
 // YOU CAN COPY EVERYTHING FROM "00-config.php" AND PASTE IT HERE INSTEAD
 include_once '00-config.php';
 
+$batch = new BatchImport();
+
+//$batch->importToContactlistId('X');
+//$batch->importToNewContactlist('Contactlist name');
+
+$response = $intellipush->create($batch);
 
 $contact = new Contact();
 
-$contact->id('');
+$contact->name('Contact')
+->countrycode('0047')
+->phone('zzzzzzzz')
+->company('Intellipush');
 
+$batch->add($contact);
 
-$response = $intellipush->read($contact);
+$contact->name('Contact2')
+->countrycode('0047')
+->phone('zzzzzzzz')
+->company('Netron');
+
+$batch->add($contact);
+
+$response = $intellipush->create($batch);
 
 echo '<pre>';
 print_r($response);

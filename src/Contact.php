@@ -46,7 +46,9 @@ class Contact implements IRequest {
         'twitter' => null,
         'param1' => null,
         'param2' => null,
-        'param3' => null
+        'param3' => null,
+        'order' => 'name',
+        'sort' => 'ASC'
     );
 
     public function __construct($name_id = null, $countrycode = null, $phonenumber = null, $email = null) {
@@ -188,6 +190,16 @@ class Contact implements IRequest {
         return $this;
     }
 
+    public function order($order) {
+        $this->contact['order'] = $order;
+        return $this;
+    }
+
+    public function sort($sort) {
+        $this->contact['sort'] = $sort;
+        return $this;
+    }
+
     public function contactFilter($contactFilter) {
         $this->contact['contactFilter'] = $contactFilter;
         return $this;
@@ -197,10 +209,19 @@ class Contact implements IRequest {
         if (!empty($this->contact['items']) && !empty($this->contact['page'])){
             $this->urlsegment = 'getContacts';
         } else {
-            $this->urlsegment = 'get';
+            if (!empty($this->contact['countrycode']) && !empty($this->contact['phonenumber'])){
+                $this->urlsegment = 'getByPhonenumber';
+            } else {
+                $this->urlsegment = 'get';
+            }
         }
     }
 
+
+    public function build(){
+        $data = $this->toArray();
+        return $data;
+    }
 
     public function create(HttpDispatcher $dispatcher, Config $config) {
         return $dispatcher->post($config->contact[$this->urlsegment], $this->contact);
@@ -223,7 +244,7 @@ class Contact implements IRequest {
 
 
     public function toArray(){
-
+        return $this->contact;
     }
 
     public function validate() {

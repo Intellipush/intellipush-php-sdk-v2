@@ -33,12 +33,21 @@ class HttpDispatcher {
     }
 
     protected function _encrypt($params) {
-        return base64_encode(mcrypt_encrypt(
+
+        return base64_encode(trim(openssl_encrypt(
+            json_encode($params),
+            'AES-256-CFB',
+            $this->config->apiSecret,
+            $options=OPENSSL_RAW_DATA,
+            substr(md5($this->config->apiSecret), 0, openssl_cipher_iv_length('AES-256-CFB') )
+        )));
+
+        /*return base64_encode(mcrypt_encrypt(
             MCRYPT_RIJNDAEL_256,
             $this->config->apiSecret,
             json_encode($params), MCRYPT_MODE_CBC,
             $this->config->apiSecret
-        ));
+        ));*/
     }
 
     public function post($url, $params) {
@@ -51,7 +60,7 @@ class HttpDispatcher {
         }
 
         $params['api_secret'] = $this->config->apiSecret;
-        $params = 'enc_request=' . urlencode($this->_encrypt($params)) . '&appID=' . $this->config->appId . '&v=2.0&s=php';
+        $params = 'enc_request=' . urlencode($this->_encrypt($params)) . '&appID=' . $this->config->appId . '&v=3.0&s=php';
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->config->endpoint . $url);

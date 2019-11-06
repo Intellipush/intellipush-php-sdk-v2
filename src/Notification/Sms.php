@@ -35,13 +35,14 @@ class Sms extends Notification {
 
     protected $receivers;
 
-    public function __construct($message = null, $receivers = array(), $when = null) {
+    public function __construct($message = null, $receivercountrycode = null, $receiverphonenumber = null, $when = null) {
         $this->notification['method'] = 'sms';
         $this->message($message);
 
-        if(is_string($receivers)) {
-            $receivers = array($receivers);
-        }
+        $receiver = array ();
+        $receiver[0] = $receivercountrycode;
+        $receiver[1] = $receiverphonenumber;
+        $receivers = array($receiver);
 
         $this->receivers($receivers);
         if(!is_null($when)) {
@@ -92,7 +93,6 @@ class Sms extends Notification {
         } else {
             $url = $config->notification['create'];
         }
-
         return $dispatcher->post($url, $data);
     }
 

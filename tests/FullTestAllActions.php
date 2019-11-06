@@ -40,6 +40,7 @@ use Intellipush\Notification\Status;
 use Intellipush\Notification\Notifications;
 use Intellipush\Contact;
 use Intellipush\Contact\Filter;
+
 use Intellipush\Contactlist;
 use Intellipush\User;
 use Intellipush\Url;
@@ -52,7 +53,7 @@ require_once $applicationPath . 'vendor/autoload.php';
 // ###########################################################################
 // ------------------------        WARNING
 
-// THIS SCRIPT WILL SEND ABOUT 10 MESSAGES NOW AND IN 20 MINUTES
+// THIS SCRIPT WILL SEND A FEW MEESAGES INSTANTLY, AND A FEW MORE WITHIN THE NEST 20 MINUTES.
 
 // ------------------------        WARNING
 // ###########################################################################
@@ -65,6 +66,8 @@ $phonenumberToTest = 'yyyyyyyy';
 
 $intellipush = new Intellipush($key, $secret);
 
+
+date_default_timezone_set('CET'); // CHANGE TO YOUR TIMEZONE
 
 
 /**
@@ -80,7 +83,7 @@ $sms->receivers(
     )
 )
 ->message('Hei hei! :)')
-->when(new \DateTime('+20 minutes'));
+->when(new \DateTime('+10 minutes'));
 
 $response = $intellipush->create($sms);
 
@@ -470,7 +473,7 @@ renderSectionOutput($response, 'Getting Number of Contacts in Contactlist');
 
 $contactlist = new Contactlist();
 
-$contactlist->id ( $contactlist_id )->items(2)->page(1)->query('st')->notInContactlist(true);
+$contactlist->id ( $contactlist_id )->items(2)->page(1)->query('Upd')->notInContactlist(true);
 
 $response = $intellipush->read($contactlist);
 

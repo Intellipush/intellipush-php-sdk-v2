@@ -1,6 +1,6 @@
 <?php
 /**
-* Copyright 2015 Intellipush AS.
+* Copyright 2016 Intellipush AS.
 *
 * You are hereby granted a non-exclusive, worldwide, royalty-free license to
 * use, copy, modify, and distribute this software in source code or binary
@@ -22,19 +22,35 @@
 *
 */
 
-use Intellipush\Contact;
+namespace Intellipush;
 
 
-// YOU CAN COPY EVERYTHING FROM "00-config.php" AND PASTE IT HERE INSTEAD
-include_once '00-config.php';
+use Intellipush\Request\IRequest,
+    Intellipush\HttpDispatcher,
+    Intellipush\Config;
+
+class Statistics implements IRequest {
+    protected $statistics = array();
+
+    public function __construct() {
+
+    }
+
+    public function create(HttpDispatcher $dispatcher, Config $config) {
+        // BLANK
+    }
+
+    public function read(HttpDispatcher $dispatcher, Config $config){
+        $this->urlsegment = 'get';
+        return $dispatcher->post($config->statistics[$this->urlsegment], $this->statistics);
+    }
 
 
-$contact = new Contact();
+    public function toArray(){
+        // BLANK
+    }
 
-$contact->id('');
-
-
-$response = $intellipush->read($contact);
-
-echo '<pre>';
-print_r($response);
+    public function validate() {
+        // BLANK
+    }
+}
