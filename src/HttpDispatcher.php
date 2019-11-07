@@ -60,6 +60,7 @@ class HttpDispatcher {
         }
 
         $params['api_secret'] = $this->config->apiSecret;
+        $params['t'] = time();
         $params = 'enc_request=' . urlencode($this->_encrypt($params)) . '&appID=' . $this->config->appId . '&v=3.0&s=php';
 
         $ch = curl_init();
