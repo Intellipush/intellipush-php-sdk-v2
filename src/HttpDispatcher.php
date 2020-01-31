@@ -32,24 +32,6 @@ class HttpDispatcher {
         $this->config = $config;
     }
 
-    protected function _encrypt($params) {
-
-        return base64_encode(trim(openssl_encrypt(
-            json_encode($params),
-            'AES-256-CFB',
-            $this->config->apiSecret,
-            $options=OPENSSL_RAW_DATA,
-            substr(md5($this->config->apiSecret), 0, openssl_cipher_iv_length('AES-256-CFB') )
-        )));
-
-        /*return base64_encode(mcrypt_encrypt(
-            MCRYPT_RIJNDAEL_256,
-            $this->config->apiSecret,
-            json_encode($params), MCRYPT_MODE_CBC,
-            $this->config->apiSecret
-        ));*/
-    }
-
     public function post($url, $params) {
 
         // Setting required parameters for all requests
